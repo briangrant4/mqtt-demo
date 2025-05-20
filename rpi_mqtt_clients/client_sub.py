@@ -27,7 +27,7 @@ def client_subscriptions(client):
     client.subscribe("decibel/#")
     client.subscribe("rpi/broadcast")
 
-client = mqtt.Client("rpi_client1", protocol=mqtt.MQTTv311) #this should be a unique name
+client = mqtt.Client(client_id="rpi_client1", protocol=mqtt.MQTTv311) #this should be a unique name
 flag_connected = 0
 
 client.on_connect = on_connect
