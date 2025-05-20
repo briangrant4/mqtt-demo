@@ -24,7 +24,7 @@ def callback_rpi_broadcast(client, userdata, msg):
     print('RPi Broadcast message:  ', str(msg.payload.decode('utf-8')))
 
 def client_subscriptions(client):
-    client.subscribe("esp32/#")
+    client.subscribe("decibel/#")
     client.subscribe("rpi/broadcast")
 
 client = mqtt.Client("rpi_client1") #this should be a unique name
@@ -32,8 +32,8 @@ flag_connected = 0
 
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect
-client.message_callback_add('esp32/sensor1', callback_esp32_sensor1)
-client.message_callback_add('esp32/sensor2', callback_esp32_sensor2)
+client.message_callback_add('decibel/ActDecibel', callback_esp32_sensor1)
+client.message_callback_add('decibel/AvgDecibel', callback_esp32_sensor1)
 client.message_callback_add('rpi/broadcast', callback_rpi_broadcast)
 client.connect('127.0.0.1',1883)
 # start a new thread
