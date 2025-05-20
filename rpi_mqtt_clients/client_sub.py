@@ -1,13 +1,13 @@
 import paho.mqtt.client as mqtt
 import time
 
-def on_connect(client, userdata, flags, rc):
+def on_connect(client, userdata, flags, rc, properties=None):
    global flag_connected
    flag_connected = 1
    client_subscriptions(client)
    print("Connected to MQTT server")
 
-def on_disconnect(client, userdata, rc):
+def on_disconnect(client, userdata, rc, properties=None):
    global flag_connected
    flag_connected = 0
    print("Disconnected from MQTT server")
@@ -27,7 +27,7 @@ def client_subscriptions(client):
     client.subscribe("decibel/#")
     client.subscribe("rpi/broadcast")
 
-client = mqtt.Client("rpi_client1") #this should be a unique name
+client = mqtt.Client("rpi_client1", protocol=mqtt.MQTTv311) #this should be a unique name
 flag_connected = 0
 
 client.on_connect = on_connect
